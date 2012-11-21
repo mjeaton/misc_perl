@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<backup_info>
+	<!--
+	
+		Destination = this is where the files are initially copied.  This would normally be
+		a local or network drive.  Requires the trailing "\".  This folder will be created if it
+		doesn't already exist.
+		
+		Reset archive bit = this is currently ignored.
+		
+		Log dir = This is the directory where backup.log is created.  Backup.log is overwritten
+		each time a backup is run.  Requires the trailing "\" and this folder MUST exist.
+		
+		Use dates = If this option is set, the files to be backed up are placed in a dated directory under
+		the Destination.
+		
+		cd_drive = This is the drive letter of the final destination for the backup files.  This will most
+		commonly be a CD ROM drive.
+		
+		eject when done = if this is a CD ROM and this option is set to 1, the CD will be ejected when
+		the backup is complete.
+	
+		0 = false
+		1 = true
+
+		Purge after days = old backups will be deleted if they are at least X days old.
+	-->
+	<configuration>
+		<destination>c:\backup\</destination>	
+		<reset_archive_bit>0</reset_archive_bit>
+		<log_dir>c:\logs\</log_dir>
+		<use_dates>1</use_dates>
+		<cd_drive>d:</cd_drive>
+		<eject_when_done>1</eject_when_done>
+		<mail_server>SMTP SERVER GOES HERE</mail_server>
+		<mail_from>FROM EMAIL ADDRESS GOES HERE</mail_from>
+		<mail_subject>Backup (Test)</mail_subject>
+		<purge_after_days>30</purge_after_days>
+		<zip_path>c:\progra~1\7-Zip\7za.exe</zip_path>
+	</configuration>
+	<!-- 
+		Each file listed below must have the file specification (name) of the files you
+		wish to backup.  You may use any valid wildcards or individual files.
+
+		Compress: 1=no compression, 4=max compression
+
+		archive_name: the name of the zipfile.  If Use_Dates (from configuration section)
+		is set to 1, then the backup files will be created within dated directories.
+
+		recurse: 0=do not recurse directories, 1=current folder and all sub-folders
+	-->
+	<files>
+		<file fileset="All" name = "c:\projects\misc_ruby\*.*" compress="1" archive_name="ruby.zip" recurse="0" dir_name="ruby"/>
+	</files>
+	<!--
+		Any email addresses listed in this section will receive an email with the backup status (success or
+		failure) when the backup is complete.
+	-->
+	<email_recipients>
+		<recipient email="RECIPIENT EMAIL ADDRESS GOES HERE"/>
+	</email_recipients>
+</backup_info>
